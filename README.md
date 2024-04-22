@@ -29,6 +29,16 @@ The parameters of NIEE.py are as follows:
 
 ```-o``` output name.
 
+## Supplementary information
+
+Folders ```KEGG```,```MIC``` and ```Weight``` contain test scripts that support method comparison calculations in Supplementary Note S6-S8.
+
+Folder ```KEGG``` contains the KEGG pathway background network calculation scripts.
+
+Folder ```MIC``` contains the Maximal Information Coefficient calculation scripts.
+
+Folder ```Weight``` contains the weight of protein sequence length calculation scripts.
+
 
 ## Data avalability
 
