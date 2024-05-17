@@ -75,52 +75,23 @@ def entropy(pc, sd, idlist1, idlist2, edge_entropy, edge_sd):
             edge_entropy[i] = 0
             edge_sd[i] = 0
             continue
-        if len_left_not_zero < 2 and len_right_not_zero > 1:
-            right_prob = (pc[p2][right_not_zero]) / np.sum((pc[p2][right_not_zero]))
-            right_entropy = -np.sum(right_prob * np.log2(right_prob)) / np.log2(
-                len_right_not_zero
-            )
-            entropy = (
-                right_entropy
-                / (len_left_not_zero + len_right_not_zero)
-                * len_right_not_zero
-            )
-            edge_entropy[i] = entropy
-            edge_sd[i] = (sd[p1] * len_left_not_zero + sd[p2] * len_right_not_zero) / (
-                len_left_not_zero + len_right_not_zero
-            )
-            continue
-        if len_left_not_zero > 1 and len_right_not_zero < 2:
-            left_prob = (pc[p1][left_not_zero]) / np.sum((pc[p1][left_not_zero]))
-            left_entropy = -np.sum(left_prob * np.log2(left_prob)) / np.log2(
-                len_left_not_zero
-            )
-            entropy = (
-                left_entropy
-                / (len_left_not_zero + len_right_not_zero)
-                * len_left_not_zero
-            )
-            edge_entropy[i] = entropy
-            edge_sd[i] = (sd[p1] * len_left_not_zero + sd[p2] * len_right_not_zero) / (
-                len_left_not_zero + len_right_not_zero
-            )
-            continue
 
-        edge_sd[i] = (sd[p1] * len_left_not_zero + sd[p2] * len_right_not_zero) / (
-            len_left_not_zero + len_right_not_zero
-        )
-        left_prob = (pc[p1][left_not_zero]) / np.sum((pc[p1][left_not_zero]))
-        right_prob = (pc[p2][right_not_zero]) / np.sum((pc[p2][right_not_zero]))
-        left_entropy = -np.sum(left_prob * np.log2(left_prob)) / np.log2(
-            len_left_not_zero
-        )
-        right_entropy = -np.sum(right_prob * np.log2(right_prob)) / np.log2(
-            len_right_not_zero
-        )
-        entropy = (
-            right_entropy * len_right_not_zero + left_entropy * len_left_not_zero
-        ) / (len_left_not_zero + len_right_not_zero)
-        edge_entropy[i] = entropy
+        left_weight = len_left_not_zero if len_left_not_zero > 0 else 0
+        right_weight = len_right_not_zero if len_right_not_zero > 0 else 0
+
+        if left_weight > 0 and right_weight > 0:
+            left_prob = (pc[p1][left_not_zero]) / np.sum(pc[p1][left_not_zero])
+            right_prob = (pc[p2][right_not_zero]) / np.sum(pc[p2][right_not_zero])
+
+            left_entropy = -np.sum(left_prob * np.log2(left_prob))
+            right_entropy = -np.sum(right_prob * np.log2(right_prob))
+
+            edge_entropy[i] = (left_entropy * left_weight + right_entropy * right_weight) / (left_weight + right_weight)
+            edge_sd[i] = (sd[p1] * left_weight + sd[p2] * right_weight) / (left_weight + right_weight)
+        else:
+            edge_entropy[i] = 0
+            edge_sd[i] = 0
+            
 
 # Reference samples calculation
 origin_frame = expr[reference].to_numpy()
