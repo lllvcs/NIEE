@@ -1,6 +1,10 @@
 # NIEE
 source code for paper "Detecting Tipping Points of Complex Diseases by Network Information Entropy"
 
+## Cite
+
+Chengshang Lyu, Lingxi Chen, Xiaoping Liu, Detecting Tipping Points of Complex Diseases by Network Information Entropy, Briefings in Bioinformatics, Volume 25, Issue 4, July 2024, bbae311, [https://doi.org/10.1093/bib/bbae311](https://doi.org/10.1093/bib/bbae311)
+
 ## Detecting Tipping Points of Complex Diseases by Network Information Entropy
 
 The progression of complex diseases often involves abrupt and non-linear changes, characterized by sudden shifts that trigger critical transformations. Identifying these critical states or tipping points is crucial for understanding disease progression and developing effective interventions. To address this challenge, we present a model-free method named Network Information Entropy of Edges (NIEE). Leveraging dynamic network biomarkers (DNB), sample-specific network (SSN), and information entropy theories, NIEE detects critical states or tipping points in diverse data types, including bulk, single sample expression data. Demonstrating its effectiveness, we applied NIEE to several real disease datasets, successfully detecting critical points before disease onset. Our findings underscore NIEE's potential to enhance comprehension of complex disease development.
